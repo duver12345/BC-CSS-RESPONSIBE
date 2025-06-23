@@ -1,0 +1,449 @@
+/* Variables CSS para consistencia de diseño */
+:root {
+    /* Colores principales */
+    --color-primary: #85ade9; 
+    --color-primary-dark: #5cb1f6; 
+    --color-secondary: #6b7280; 
+    --color-accent: #fcb64d; 
+
+    /* Colores de texto */
+    --color-text: #1f2937; /* Gris oscuro para el texto principal */
+    --color-text-light: #4b5563; /* Un gris más claro para descripciones */
+    --color-text-white: #ffffff;
+
+    /* Colores de fondo */
+    --color-bg: #f9fafb; /* Un blanco muy suave */
+    --color-bg-light: #e5e7eb; /* Un gris muy claro para secciones */
+    --color-bg-dark: #8b5cf6; /* Un gris muy oscuro para el footer */
+
+    /* Tipografía */
+    --font-primary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+
+    /* Espaciado consistente */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-2xl: 4rem;
+
+    /* Breakpoints */
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+}
+
+/* ========================================= */
+/* Reset y Estilos Base                      */
+/* ========================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 100%; /* Base para rem */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+}
+
+/* ========================================= */
+/* Utilidades de Layout                      */
+/* ========================================= */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-sm);
+}
+
+/* En tabletas y desktop, aumentamos el padding lateral */
+@media (min-width: 768px) {
+    .container {
+        padding: var(--space-lg);
+    }
+}
+
+/* ========================================= */
+/* Tipografía Responsiva                     */
+/* ========================================= */
+.section_title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+/* ========================================= */
+/* Header y Navegación                       */
+/* ========================================= */
+.header {
+    background-color: var(--color-bg);
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header_content {
+    /* Cambiamos a flexbox en columna y centrado */
+    display: flex;
+    flex-direction: column; /* Apila elementos verticalmente */
+    align-items: center; /* Centra horizontalmente */
+    padding: var(--space-sm) 0;
+    text-align: center; /* Asegura que el logo también se centre si es necesario */
+}
+
+.logo_text {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm); /* Espacio debajo del nombre */
+}
+
+/* Envoltorio de la navegación, para controlarla como un bloque */
+.nav_wrapper {
+    width: 100%; /* Ocupa todo el ancho disponible bajo el logo */
+    /* Puedes añadir un poco de margen superior si el espacio entre el logo y la nav es poco */
+}
+
+.nav_list {
+    display: flex;
+    justify-content: center; /* Centra los elementos de la navegación */
+    list-style: none;
+    gap: var(--space-md);
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+}
+
+.nav_link {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: var(--font-weight-medium);
+    transition: all 0.3s ease;
+    padding: var(--space-xs) var(--space-sm); /* Añade padding para mejor área de clic */
+}
+
+.nav_link:hover {
+    color: var(--color-primary);
+}
+
+
+@media (max-width: 767px) {
+    .nav_list {
+        flex-direction: column; 
+        align-items: center; 
+        gap: var(--space-sm);
+    }
+
+    .nav_link {
+        font-size: 1rem; 
+        width: 100%; 
+        max-width: 200px; 
+        border: 1px solid var(--color-bg-light); 
+        border-radius: 5px;
+    }
+    .nav_link:hover {
+        background-color: var(--color-bg-light);
+    }
+
+
+}
+
+/* Para pantallas más grandes, nos aseguramos que el logo y la nav estén bien alineados */
+@media (min-width: 768px) {
+    .header_content {
+        flex-direction: column; /* Mantiene la pila vertical */
+        justify-content: center; /* Centra el contenido */
+    }
+
+    .logo_text {
+        margin-bottom: var(--space-md); /* Más espacio en desktop */
+    }
+
+    .nav_list {
+        flex-direction: row; /* Vuelve a la fila horizontal */
+        justify-content: center; /* Centra los elementos */
+        gap: var(--space-lg); /* Más espacio entre enlaces */
+    }
+
+    .nav_link {
+        font-size: 1.05rem; /* Ajuste de tamaño */
+        padding: 0; /* Quita el padding adicional que dimos para móvil */
+        border: none; /* Quita el borde de móvil */
+    }
+}
+
+.nav_link:hover {
+    color: var(--color-primary);
+}
+
+/* Navegación responsive - en móvil ocultamos algunos elementos */
+@media (max-width: 767px) {
+    .nav_list {
+        /* Ejemplo: Ocultar en móvil y mostrar con JavaScript un menú hamburguesa */
+        display: none;
+    }
+
+    .nav_link {
+        font-size: 0.9rem;
+    }
+}
+
+
+/* ========================================= */
+/* Sección Hero                              */
+/* ========================================= */
+.hero {
+    background: linear-gradient(135deg, var(--color-bg-light) 0%, #e2e8f0 100%);
+    padding: var(--space-2xl) 0;
+    text-align: center;
+}
+
+.hero_title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+}
+
+.hero_highlight {
+    color: var(--color-primary);
+    display: block; /* Para que ocupe toda la línea */
+}
+
+.hero_description {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto var(--space-xl);
+}
+
+.hero_actions {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    flex-wrap: wrap; /* Para que los botones se envuelvan en pantallas pequeñas */
+}
+
+/* ========================================= */
+/* Botones Responsive                        */
+/* ========================================= */
+.btn {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.btn--primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-white);
+    border-color: var(--color-primary);
+}
+
+.btn--primary:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn--secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn--secondary:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text-white);
+}
+
+/* En móvil, los botones ocupan todo el ancho disponible */
+@media (max-width: 640px) {
+    .hero_actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn {
+        width: 100%;
+        max-width: 280px; /* Limitar el ancho máximo incluso si es 100% */
+    }
+}
+
+/* ========================================= */
+/* Sección About                             */
+/* ========================================= */
+.about {
+    padding: var(--space-2xl) 0;
+}
+
+.about_content {
+    display: grid;
+    gap: var(--space-xl);
+    align-items: center;
+}
+
+.about_text p {
+    margin-bottom: var(--space-md);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.about_text p:last-child {
+    margin-bottom: 0;
+}
+
+.placeholder-image {
+    background-color: var(--color-bg-light);
+    border: 2px dashed var(--color-secondary);
+    border-radius: 12px;
+    aspect-ratio: 1 / 1; /* Para que sea cuadrado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light);
+    font-weight: var(--font-weight-medium);
+}
+
+/* En tabletas y desktop, usamos layout de dos columnas */
+@media (min-width: 768px) {
+    .about_content {
+        /* CAMBIO APLICADO: La imagen (1fr) ahora va primero, luego el texto (2fr) */
+        grid-template-columns: 1fr 2fr;
+    }
+    .placeholder-image {
+        max-width: 300px;
+        justify-self: center; /* Centra la imagen dentro de su columna */
+    }
+}
+
+/* ========================================= */
+/* Sección Skills con Grid Responsivo        */
+/* ========================================= */
+.skills {
+    background-color: var(--color-bg-light);
+    padding: var(--space-2xl) 0;
+}
+
+.skills_grid {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: 1fr; /* Por defecto, una columna en móvil */
+}
+
+/* Grid responsive que se adapta automáticamente */
+@media (min-width: 640px) { /* Small devices, 2 columns */
+    .skills_grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) { /* Large devices, 4 columns */
+    .skills_grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.skill-card {
+    background-color: var(--color-bg);
+    border-radius: 12px;
+    padding: var(--space-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.skill-card_title {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.skill-card_description {
+    color: var(--color-text-light);
+    line-height: 1.6;
+}
+
+/* ========================================= */
+/* Footer                                    */
+/* ========================================= */
+.footer {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-white);
+    padding: var(--space-2xl) 0;
+    text-align: center;
+}
+
+.footer_title {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-sm);
+}
+
+.footer_description {
+    font-size: 1.1rem;
+    color: #ffffff; /* Un gris más claro para la descripción */
+    margin-bottom: var(--space-xl);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer_contact {
+    display: flex;
+    gap: var(--space-lg);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.contact-link {
+    color: var(--color-text-white);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid #513750; /* Un borde sutil */
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+}
+
+/* En móvil, los enlaces de contacto se apilan verticalmente */
+@media (max-width: 640px) {
+    .footer_contact {
+        flex-direction: column;
+        align-items: center;
+    }
+    .contact-link {
+        width: 100%;
+        max-width: 250px;
+    }
+}
